@@ -1,0 +1,5 @@
+[submodule "3rd_party/rang"]
+	path = 3rd_party/rang
+	url = https://github.com/agauniyal/rang.git
+	shallow = true
+	branch = v3.1.0

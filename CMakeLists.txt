@@ -5,6 +5,7 @@ project(bel
 
 set(CMAKE_CXX_STANDARD 11)
 option(BEL_BUILD_RANG "A small library that colorizes your terminal." ON)
+option(BEL_BUILD_CURL "cURL" ON)
 
 find_package(bia REQUIRED)
 
@@ -15,6 +16,16 @@ if(BEL_BUILD_RANG)
 	list(APPEND BEL_SOURCE_FILES "bel/rang/module.cpp")
 	target_include_directories(bel
 		PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/3rd_party/rang/include")
+endif()
+
+if(BEL_BUILD_CURL)
+	find_package(CURL REQUIRED)
+	list(APPEND BEL_HEADER_FILES "bel/curl/module.hpp")
+	list(APPEND BEL_SOURCE_FILES "bel/curl/module.cpp")
+	target_include_directories(bel
+		PUBLIC "${CURL_INCLUDE_DIRS}")
+	target_link_libraries(bel
+		PUBLIC "${CURL_LIBRARIES}")
 endif()
 
 target_sources(bel
